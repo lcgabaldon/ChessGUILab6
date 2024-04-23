@@ -14,7 +14,6 @@ public class ChessGUI extends JFrame implements ActionListener {
     private Tile[][] boardCells;
 
     public ChessGUI() {
-        // initializeBoard();
         initializeUI();
     }
 
@@ -76,6 +75,7 @@ public class ChessGUI extends JFrame implements ActionListener {
         JButton OKButton = new JButton("Select");
         OKButton.setFont(new Font("Arial", Font.BOLD, 16)); // Enhance button's font
         OKButton.setPreferredSize(new Dimension(100, 40)); // Set preferred size
+        OKButton.addActionListener(this);// register an action listener
 
         // Set up the control panel for horizontal layout
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
@@ -104,5 +104,12 @@ public class ChessGUI extends JFrame implements ActionListener {
                 boardPanel.add(tile);
             }
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) { // Handle the event
+        // call your verify move method
+        JOptionPane.showMessageDialog(new JFrame(),
+                "You have selected a piece");
     }
 }
