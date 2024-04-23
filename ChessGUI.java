@@ -21,7 +21,7 @@ public class ChessGUI extends JFrame implements ActionListener {
     private void initializeUI() {
         setTitle("Lab 6: Chess!");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200, 1240);
+        setSize(1000, 1040);
 
         mainPanel = new JPanel(new BorderLayout());
         boardPanel = new JPanel(new GridLayout(8, 8));
