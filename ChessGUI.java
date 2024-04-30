@@ -99,6 +99,23 @@ public class ChessGUI extends JFrame implements ActionListener {
         OKButton.setPreferredSize(new Dimension(100, 40)); // Set preferred size
         OKButton.addActionListener(this);// register an action listener
 
+        JButton clearButton = new JButton("Clear");
+        clearButton.setFont(new Font("Arial", Font.BOLD, 16)); // Keep the style consistent with the Select button
+        clearButton.setPreferredSize(new Dimension(100, 40)); // Same dimensions for consistency
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Clear the chess board
+                // For example, you might reset the board array, remove pieces from the GUI,
+                // etc.
+                for (int row = 0; row < 8; row++) {
+                    for (int col = 0; col < 8; col++) {
+                        boardCells[row][col].clearPieceIcon();
+                    }
+                }
+            }
+        });
+
         // Set up the control panel for horizontal layout
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
         controlPanel.add(piecePanel);
@@ -106,6 +123,7 @@ public class ChessGUI extends JFrame implements ActionListener {
         controlPanel.add(columnPanel);
         controlPanel.add(rankPanel);
         controlPanel.add(OKButton);
+        controlPanel.add(clearButton);
 
         // Ensure the panel does not expand its components to fill space
         controlPanel.add(Box.createHorizontalGlue());
