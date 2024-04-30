@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import exceptions.*;
 import figures.*;
 import interfaces.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChessGUI extends JFrame implements ActionListener {
 
@@ -12,9 +14,29 @@ public class ChessGUI extends JFrame implements ActionListener {
     private JPanel boardPanel; // the specific board
     private JPanel controlPanel; // where the buttons are on the left
     private Tile[][] boardCells;
+    private Map<String, ImageIcon> pieceImages;
 
     public ChessGUI() {
+        initializePictures();
         initializeUI();
+    }
+
+    private void initializePictures() {
+        pieceImages = new HashMap<>();
+        String[] pieces = { "pawn", "knight", "bishop", "rook", "queen", "king" };
+        String[] colors = { "white", "black" };
+
+        for (String color : colors) {
+            for (String piece : pieces) {
+                String filename = "PiecePictures/" + color + "_" + piece + ".gif";
+                ImageIcon image = new ImageIcon(filename);
+                pieceImages.put(color + "_" + piece, image);
+            }
+        }
+    }
+
+    public ImageIcon getImageIcon(String pieceName) {
+        return pieceImages.get(pieceName);
     }
 
     private void initializeUI() {
