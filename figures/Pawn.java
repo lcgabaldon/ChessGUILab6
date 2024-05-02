@@ -19,9 +19,9 @@ public class Pawn extends Figure {
   @Override
   public boolean moveTo(Column newColumn, int newRow) {
     if (this.color == Colorr.WHITE) {
-      return this.column == newColumn && newRow == this.row + 1;
-    } else {
       return this.column == newColumn && newRow == this.row - 1;
+    } else {
+      return this.column == newColumn && newRow == this.row + 1;
     }
   }// end moveTo
 }// end Pawn

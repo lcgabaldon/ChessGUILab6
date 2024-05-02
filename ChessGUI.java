@@ -114,32 +114,32 @@ public class ChessGUI extends JFrame implements ActionListener {
                     return;
                 }
 
-                int column = selectedColumn.charAt(0) - 'A';
+                Column column = Column.valueOf(selectedColumn);
                 int rank = 8 - Integer.parseInt(selectedRank);
                 String key = selectedColor.toLowerCase() + "_" + selectedPieceType.toLowerCase();
 
                 if (!placedPieces.contains(key)) {
                     ImageIcon icon = getImageIcon(key);
-                    boardCells[rank][column].setPieceIcon(icon);
-                    boardCells[rank][column].revalidate();
-                    boardCells[rank][column].repaint();
+                    boardCells[rank][column.ordinal()].setPieceIcon(icon);
+                    boardCells[rank][column.ordinal()].revalidate();
+                    boardCells[rank][column.ordinal()].repaint();
                     placedPieces.add(key); // Mark this piece as placed
 
                     // Ask for target position
                     String targetPosition = JOptionPane.showInputDialog("Enter target position (e.g., A5):");
                     if (targetPosition != null && targetPosition.length() == 2) {
-                        int targetCol = targetPosition.toUpperCase().charAt(0) - 'A';
+                        Column targetColumn = Column.valueOf(targetPosition.toUpperCase().substring(0, 1));
                         int targetRow = 8 - Character.getNumericValue(targetPosition.charAt(1));
 
                         Figure piece = createPiece(PieceType.valueOf(selectedPieceType.toUpperCase()),
                                 Colorr.valueOf(selectedColor.toUpperCase()),
-                                Column.valueOf(selectedColumn), rank);
+                                column, rank);
 
-                        if (piece.moveTo(Column.values()[targetCol], targetRow)) {
-                            boardCells[rank][column].setPieceIcon(null); // Clear old icon
-                            boardCells[targetRow][targetCol].setPieceIcon(icon);
-                            boardCells[targetRow][targetCol].revalidate();
-                            boardCells[targetRow][targetCol].repaint();
+                        if (piece.moveTo(targetColumn, targetRow)) {
+                            boardCells[rank][column.ordinal()].setPieceIcon(null); // Clear old icon
+                            boardCells[targetRow][targetColumn.ordinal()].setPieceIcon(icon);
+                            boardCells[targetRow][targetColumn.ordinal()].revalidate();
+                            boardCells[targetRow][targetColumn.ordinal()].repaint();
                             JOptionPane.showMessageDialog(null, "The piece can move to " + targetPosition + ".",
                                     "Valid Move", JOptionPane.INFORMATION_MESSAGE);
                         } else {
